@@ -1,0 +1,7 @@
+steps:
+    - commands:
+          - "swift package clean"
+          - "swift build"
+          - "swift test"
+          - "swiftlint lint --quiet"
+          - "swift run --package-path Examples/ApproximateEqualityExamples"
