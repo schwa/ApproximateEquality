@@ -14,7 +14,7 @@ let package = Package(
         .executableTarget(
             name: "ApproximateEqualityExamples",
             dependencies: [
-                "ApproximateEquality"
+                .product(name: "ApproximateEquality", package: "approximateequality")
             ]
         ),
     ]
