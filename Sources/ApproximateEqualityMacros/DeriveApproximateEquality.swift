@@ -33,12 +33,8 @@ extension DeriveApproximateEquality: ExtensionMacro {
             $0.as(PatternBindingSyntax.self)!
         }
         let tests = patternBindings.map { binding in
-            guard let identifier = binding.pattern.as(IdentifierPatternSyntax.self)?.identifier else {
-                fatalError()
-            }
-            guard let type = binding.typeAnnotation?.type.as(IdentifierTypeSyntax.self)?.name else {
-                fatalError()
-            }
+            let identifier = binding.pattern.as(IdentifierPatternSyntax.self)!.identifier
+            let type = binding.typeAnnotation!.type.as(IdentifierTypeSyntax.self)!.name
             // TODO: Dislike the casting here.
             return "\(identifier).isApproximatelyEqual(to: other.\(identifier), relativeTolerance: \(type)(relativeTolerance))"
         }

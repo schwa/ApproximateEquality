@@ -28,7 +28,7 @@ let thing3 = MyType(x: 10 + error, y: 20, z: 5000)
 
 print(thing1.isApproximatelyEqual(to: thing2))                         // true
 print(!thing1.isApproximatelyEqual(to: thing3))                        // true
-print(thing1.isApproximatelyEqual(to: thing3, relativeTolerance: 0.1)) // true
+print(thing1.isApproximatelyEqual(to: thing3, absoluteTolerance: 0.1)) // true
 ```
 
 ## TODO

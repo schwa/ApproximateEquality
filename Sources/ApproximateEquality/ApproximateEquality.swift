@@ -1,30 +1,28 @@
 @_implementationOnly import Numerics
 
-/// Types conforming to ``ApproximateEquality`` can be tested for approximate equality with ``isApproximatelyEqual(to:relativeTolerance:)-6v7ke``
+/// Types conforming to ``ApproximateEquality`` can be tested for approximate equality with ``isApproximatelyEqual(to:absoluteTolerance:)-6v7ke``
 public protocol ApproximateEquality {
     associatedtype Magnitude: FloatingPoint
 
-    // TODO: Provide version that uses ``norm`` from ``Numerics.isApproximatelyEqual``
-    func isApproximatelyEqual(to other: Self, relativeTolerance: Magnitude) -> Bool
-    func isApproximatelyEqual(to other: Self) -> Bool
+    func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool
 }
 
-extension ApproximateEquality where Self.Magnitude: FloatingPoint {
-    public func isApproximatelyEqual(to other: Self) -> Bool {
-        return isApproximatelyEqual(to: other, relativeTolerance: Magnitude.ulpOfOne.squareRoot())
-    }
-}
-
-extension ApproximateEquality where Self: Numeric {
-    public func isApproximatelyEqual(to other: Self, relativeTolerance: Magnitude) -> Bool {
-        return isApproximatelyEqual(to: other, relativeTolerance: relativeTolerance, norm: \.magnitude)
-    }
-}
+//extension ApproximateEquality where Self.Magnitude: FloatingPoint {
+//    public func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool {
+//        return isApproximatelyEqual(to: other, absoluteTolerance: absoluteTolerance, relativeTolerance: Magnitude.zero)
+//    }
+//}
 
 extension Float: ApproximateEquality {
+    public func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool {
+        return isApproximatelyEqual(to: other, absoluteTolerance: absoluteTolerance, relativeTolerance: Magnitude.zero)
+    }
 }
 
 extension Double: ApproximateEquality {
+    public func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool {
+        return isApproximatelyEqual(to: other, absoluteTolerance: absoluteTolerance, relativeTolerance: Magnitude.zero)
+    }
 }
 
 /// Test elements of `self` against elements `other` for approximate equality.
@@ -32,12 +30,12 @@ extension Double: ApproximateEquality {
 extension Array: ApproximateEquality where Element: ApproximateEquality {
     public typealias Magnitude = Element.Magnitude
 
-    public func isApproximatelyEqual(to other: Self, relativeTolerance: Element.Magnitude) -> Bool {
+    public func isApproximatelyEqual(to other: Self, absoluteTolerance: Element.Magnitude) -> Bool {
         guard self.count == other.count else {
             return false
         }
         return zip(self, other).allSatisfy({
-            return $0.isApproximatelyEqual(to: $1, relativeTolerance: relativeTolerance)
+            return $0.isApproximatelyEqual(to: $1, absoluteTolerance: absoluteTolerance)
         })
     }
 }
