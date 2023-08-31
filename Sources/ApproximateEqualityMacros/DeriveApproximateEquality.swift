@@ -8,11 +8,7 @@ public struct DeriveApproximateEquality {
 
 extension DeriveApproximateEquality: ExtensionMacro {
     public static func expansion(of node: AttributeSyntax, attachedTo declaration: some DeclGroupSyntax, providingExtensionsOf type: some TypeSyntaxProtocol, conformingTo protocols: [TypeSyntax], in context: some MacroExpansionContext) throws -> [ExtensionDeclSyntax] {
-
-
         let isPublic = declaration.modifiers.map(\.trimmedDescription).contains("public")
-
-
         let patternBindings = declaration.match(path: [
             MemberBlockSyntax.self,
             MemberBlockItemListSyntax.self,
@@ -41,7 +37,7 @@ extension DeriveApproximateEquality: ExtensionMacro {
             let identifier = binding.pattern.as(IdentifierPatternSyntax.self)!.identifier
             let type = binding.typeAnnotation!.type.as(IdentifierTypeSyntax.self)!.name
             // TODO: Dislike the casting here.
-            return "\(identifier).isApproximatelyEqual(to: other.\(identifier), absoluteTolerance: \(type)(absoluteTolerance))"
+            return "\(identifier).isApproximatelyEqual(to: other.\(identifier), absoluteTolerance: \(type).Magnitude(absoluteTolerance))"
         }
         .joined(separator: "\n        && ")
         // TODO: Dislike the default type of Double.
