@@ -11,7 +11,7 @@ import Foundation
 ///     var z: Double
 /// }
 /// ```
-@attached(extension, conformances: ApproximateEquality, names: named(isApproximatelyEqual(to:relativeTolerance:)))
+@attached(extension, conformances: ApproximateEquality, names: named(isApproximatelyEqual(to:absoluteTolerance:)))
 public macro DeriveApproximateEquality() = #externalMacro(module: "ApproximateEqualityMacros", type: "DeriveApproximateEquality")
 
 /// Use on a property to opt out of ``DeriveApproximateEquality``. Use this for when you don't want a property to be considered for ``ApproximateEquality`` conformance.

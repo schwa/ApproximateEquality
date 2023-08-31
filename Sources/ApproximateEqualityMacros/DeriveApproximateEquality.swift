@@ -36,14 +36,14 @@ extension DeriveApproximateEquality: ExtensionMacro {
             let identifier = binding.pattern.as(IdentifierPatternSyntax.self)!.identifier
             let type = binding.typeAnnotation!.type.as(IdentifierTypeSyntax.self)!.name
             // TODO: Dislike the casting here.
-            return "\(identifier).isApproximatelyEqual(to: other.\(identifier), relativeTolerance: \(type)(relativeTolerance))"
+            return "\(identifier).isApproximatelyEqual(to: other.\(identifier), absoluteTolerance: \(type)(absoluteTolerance))"
         }
         .joined(separator: "\n        && ")
         // TODO: Dislike the default type of Double.
         return [try ExtensionDeclSyntax(
             """
             extension \(type): ApproximateEquality {
-                func isApproximatelyEqual(to other: Self, relativeTolerance: Double.Magnitude) -> Bool {
+                func isApproximatelyEqual(to other: Self, absoluteTolerance: Double.Magnitude) -> Bool {
                     \(raw: tests)
                 }
             }
