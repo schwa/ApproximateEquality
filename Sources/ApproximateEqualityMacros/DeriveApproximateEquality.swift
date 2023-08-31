@@ -8,6 +8,11 @@ public struct DeriveApproximateEquality {
 
 extension DeriveApproximateEquality: ExtensionMacro {
     public static func expansion(of node: AttributeSyntax, attachedTo declaration: some DeclGroupSyntax, providingExtensionsOf type: some TypeSyntaxProtocol, conformingTo protocols: [TypeSyntax], in context: some MacroExpansionContext) throws -> [ExtensionDeclSyntax] {
+
+
+        let isPublic = declaration.modifiers.map(\.trimmedDescription).contains("public")
+
+
         let patternBindings = declaration.match(path: [
             MemberBlockSyntax.self,
             MemberBlockItemListSyntax.self,
@@ -43,7 +48,7 @@ extension DeriveApproximateEquality: ExtensionMacro {
         return [try ExtensionDeclSyntax(
             """
             extension \(type): ApproximateEquality {
-                func isApproximatelyEqual(to other: Self, absoluteTolerance: Double.Magnitude) -> Bool {
+                \(raw: isPublic ? "public " : "")func isApproximatelyEqual(to other: Self, absoluteTolerance: Double.Magnitude) -> Bool {
                     \(raw: tests)
                 }
             }

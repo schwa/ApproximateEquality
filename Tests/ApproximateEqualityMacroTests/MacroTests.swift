@@ -44,7 +44,7 @@ final class MyMacroTests: XCTestCase {
     }
 
     func testApproximateEqualityIgnoredMacros() throws {
-        #if canImport(ApproximateEqualityMacros)
+#if canImport(ApproximateEqualityMacros)
         assertMacroExpansion(
             """
             @DeriveApproximateEquality
@@ -68,8 +68,39 @@ final class MyMacroTests: XCTestCase {
             """,
             macros: testMacros
         )
-        #else
+#else
         throw XCTSkip("macros are only supported when running tests for the host platform")
-        #endif
+#endif
     }
+
+    func testACL() throws {
+#if canImport(ApproximateEqualityMacros)
+        assertMacroExpansion(
+            """
+            @DeriveApproximateEquality
+            public struct HelloWorld: Foobar {
+                var attribute1: Double
+                var attribute2: Double
+            }
+            """,
+            expandedSource: """
+            public struct HelloWorld: Foobar {
+                var attribute1: Double
+                var attribute2: Double
+            }
+
+            extension HelloWorld: ApproximateEquality {
+                public func isApproximatelyEqual(to other: Self, absoluteTolerance: Double.Magnitude) -> Bool {
+                    attribute1.isApproximatelyEqual(to: other.attribute1, absoluteTolerance: Double(absoluteTolerance))
+                    && attribute2.isApproximatelyEqual(to: other.attribute2, absoluteTolerance: Double(absoluteTolerance))
+                }
+            }
+            """,
+            macros: testMacros
+        )
+#else
+        throw XCTSkip("macros are only supported when running tests for the host platform")
+#endif
+    }
+
 }
