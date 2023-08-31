@@ -36,12 +36,18 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "ApproximateEqualityTests",
+            name: "ApproximateEqualityMacroTests",
             dependencies: [
                 "ApproximateEquality",
                 "ApproximateEqualityMacros",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
-
+            ]
+        ),
+        .testTarget(
+            name: "ApproximateEqualityTests",
+            dependencies: [
+                "ApproximateEquality",
+                .product(name: "Numerics", package: "swift-numerics")
             ]
         ),
     ]

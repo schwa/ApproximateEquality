@@ -1,15 +1,21 @@
 import XCTest
 @testable import ApproximateEquality
+import Numerics
+
+extension Double {
+    static let error = Double.Magnitude.ulpOfOne.squareRoot() / 2
+}
+
+final class NumericsTests: XCTestCase {
+    func testFoundation() throws {
+        XCTAssertTrue(Double.error < Double.Magnitude.ulpOfOne.squareRoot())
+        XCTAssertTrue(Double.zero.isApproximatelyEqual(to: Double.zero)) // true (obviously)
+        XCTAssertTrue((10.0).isApproximatelyEqual(to: 10.0 + .error)) // true (again, obviously)
+        XCTAssertTrue(Double.zero.isApproximatelyEqual(to: Double.zero + .error)) // false (not so obvious)
+    }
+}
 
 final class ApproximateEqualityTests: XCTestCase {
     func testExample() throws {
-
-        let below = Double.Magnitude.ulpOfOne.squareRoot() / 2
-
-        XCTAssertTrue(10.0 ≅ 10.0 + below)
-        XCTAssertFalse(10.0 ≅ 10.0 + 0.001)
-
-        XCTAssertTrue(CGPoint(x: 10, y: 10) ≅ CGPoint(x: 10 + below, y: 10))
-
     }
 }
