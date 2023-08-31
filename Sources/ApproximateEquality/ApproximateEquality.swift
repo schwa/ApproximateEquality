@@ -39,3 +39,12 @@ extension Array: ApproximateEquality where Element: ApproximateEquality {
         })
     }
 }
+
+//internal func isApproximatelyEqualX <T>(_ lhs: T, _ rhs: T, absoluteTolerance: T.Magnitude) -> Bool where T: ApproximateEquality {
+//    return lhs.isApproximatelyEqual(to: rhs, absoluteTolerance: absoluteTolerance)
+//}
+//
+//func isApproximatelyEqual <each T, each M> (_ lhs: (repeat each T), _ rhs: (repeat each T), absoluteTolerance: repeat each M) -> Bool where repeat each T: ApproximateEquality, repeat each M == (repeat (each T.Magnitude)) {
+////    let x = (repeat isApproximatelyEqualX(each lhs, each rhs, absoluteTolerance: each T.Magnitude(absoluteTolerance)))
+//    fatalError()
+//}

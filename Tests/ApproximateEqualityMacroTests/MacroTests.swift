@@ -31,8 +31,8 @@ final class MyMacroTests: XCTestCase {
 
             extension HelloWorld: ApproximateEquality {
                 func isApproximatelyEqual(to other: Self, absoluteTolerance: Double.Magnitude) -> Bool {
-                    attribute1.isApproximatelyEqual(to: other.attribute1, absoluteTolerance: Double(absoluteTolerance))
-                    && attribute2.isApproximatelyEqual(to: other.attribute2, absoluteTolerance: Double(absoluteTolerance))
+                    attribute1.isApproximatelyEqual(to: other.attribute1, absoluteTolerance: Double.Magnitude(absoluteTolerance))
+                    && attribute2.isApproximatelyEqual(to: other.attribute2, absoluteTolerance: Double.Magnitude(absoluteTolerance))
                 }
             }
             """,
@@ -62,7 +62,7 @@ final class MyMacroTests: XCTestCase {
 
             extension HelloWorld: ApproximateEquality {
                 func isApproximatelyEqual(to other: Self, absoluteTolerance: Double.Magnitude) -> Bool {
-                    attribute1.isApproximatelyEqual(to: other.attribute1, absoluteTolerance: Double(absoluteTolerance))
+                    attribute1.isApproximatelyEqual(to: other.attribute1, absoluteTolerance: Double.Magnitude(absoluteTolerance))
                 }
             }
             """,
@@ -91,8 +91,8 @@ final class MyMacroTests: XCTestCase {
 
             extension HelloWorld: ApproximateEquality {
                 public func isApproximatelyEqual(to other: Self, absoluteTolerance: Double.Magnitude) -> Bool {
-                    attribute1.isApproximatelyEqual(to: other.attribute1, absoluteTolerance: Double(absoluteTolerance))
-                    && attribute2.isApproximatelyEqual(to: other.attribute2, absoluteTolerance: Double(absoluteTolerance))
+                    attribute1.isApproximatelyEqual(to: other.attribute1, absoluteTolerance: Double.Magnitude(absoluteTolerance))
+                    && attribute2.isApproximatelyEqual(to: other.attribute2, absoluteTolerance: Double.Magnitude(absoluteTolerance))
                 }
             }
             """,
