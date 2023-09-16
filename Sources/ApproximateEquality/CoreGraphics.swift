@@ -1,31 +1,37 @@
 import CoreGraphics
 
 extension CGFloat: ApproximateEquality {
+    @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool {
         return isApproximatelyEqual(to: other, absoluteTolerance: absoluteTolerance, relativeTolerance: Magnitude.zero)
     }
 }
 
 extension CGPoint: ApproximateEquality {
+    @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: CGFloat.Magnitude) -> Bool {
-        [x, y].isApproximatelyEqual(to: [other.x, other.y], absoluteTolerance: absoluteTolerance)
+        isTupleApproximatelyEqual((x, y), (other.x, other.y), absoluteTolerance: absoluteTolerance)
     }
 }
 
 extension CGSize: ApproximateEquality {
+    @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: CGFloat.Magnitude) -> Bool {
-        [width, height].isApproximatelyEqual(to: [other.width, other.height], absoluteTolerance: absoluteTolerance)
+        isTupleApproximatelyEqual((width, height), (other.width, other.height), absoluteTolerance: absoluteTolerance)
     }
 }
 
 extension CGVector: ApproximateEquality {
+    @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: CGFloat.Magnitude) -> Bool {
-        [dx, dy].isApproximatelyEqual(to: [other.dx, other.dy], absoluteTolerance: absoluteTolerance)
+        isTupleApproximatelyEqual((dx, dy), (other.dx, other.dy), absoluteTolerance: absoluteTolerance)
     }
 }
 
 extension CGRect: ApproximateEquality {
+    @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: CGFloat.Magnitude) -> Bool {
-        [minX, minY, width, height].isApproximatelyEqual(to: [other.minX, other.minY, other.width, other.height], absoluteTolerance: absoluteTolerance)
+        isTupleApproximatelyEqual((minX, minY, width, height), (other.minX, other.minY, other.width, other.height), absoluteTolerance: absoluteTolerance)
+
     }
 }

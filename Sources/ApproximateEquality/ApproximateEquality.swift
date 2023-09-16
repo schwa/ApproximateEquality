@@ -1,4 +1,4 @@
-@_implementationOnly import Numerics
+import Numerics
 
 /// Types conforming to ``ApproximateEquality`` can be tested for approximate equality with ``isApproximatelyEqual(to:absoluteTolerance:)-6v7ke``
 public protocol ApproximateEquality {
@@ -14,12 +14,14 @@ public protocol ApproximateEquality {
 //}
 
 extension Float: ApproximateEquality {
+    @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool {
         return isApproximatelyEqual(to: other, absoluteTolerance: absoluteTolerance, relativeTolerance: Magnitude.zero)
     }
 }
 
 extension Double: ApproximateEquality {
+    @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool {
         return isApproximatelyEqual(to: other, absoluteTolerance: absoluteTolerance, relativeTolerance: Magnitude.zero)
     }
@@ -40,11 +42,27 @@ extension Array: ApproximateEquality where Element: ApproximateEquality {
     }
 }
 
-//internal func isApproximatelyEqualX <T>(_ lhs: T, _ rhs: T, absoluteTolerance: T.Magnitude) -> Bool where T: ApproximateEquality {
-//    return lhs.isApproximatelyEqual(to: rhs, absoluteTolerance: absoluteTolerance)
-//}
-//
-//func isApproximatelyEqual <each T, each M> (_ lhs: (repeat each T), _ rhs: (repeat each T), absoluteTolerance: repeat each M) -> Bool where repeat each T: ApproximateEquality, repeat each M == (repeat (each T.Magnitude)) {
-////    let x = (repeat isApproximatelyEqualX(each lhs, each rhs, absoluteTolerance: each T.Magnitude(absoluteTolerance)))
-//    fatalError()
-//}
+internal func isApproximatelyEqualX <T>(_ lhs: T, _ rhs: T, absoluteTolerance: T.Magnitude) -> Bool where T: ApproximateEquality {
+    lhs.isApproximatelyEqual(to: rhs, absoluteTolerance: absoluteTolerance)
+}
+
+@inlinable
+public func isTupleApproximatelyEqual <T>(_ lhs: (T, T), _ rhs: (T, T), absoluteTolerance: T.Magnitude) -> Bool where T: ApproximateEquality {
+    lhs.0.isApproximatelyEqual(to: rhs.0, absoluteTolerance: absoluteTolerance)
+    && lhs.1.isApproximatelyEqual(to: rhs.1, absoluteTolerance: absoluteTolerance)
+}
+
+@inlinable
+public func isTupleApproximatelyEqual <T>(_ lhs: (T, T, T), _ rhs: (T, T, T), absoluteTolerance: T.Magnitude) -> Bool where T: ApproximateEquality {
+    lhs.0.isApproximatelyEqual(to: rhs.0, absoluteTolerance: absoluteTolerance)
+    && lhs.1.isApproximatelyEqual(to: rhs.1, absoluteTolerance: absoluteTolerance)
+    && lhs.2.isApproximatelyEqual(to: rhs.2, absoluteTolerance: absoluteTolerance)
+}
+
+@inlinable
+public func isTupleApproximatelyEqual <T>(_ lhs: (T, T, T, T), _ rhs: (T, T, T, T), absoluteTolerance: T.Magnitude) -> Bool where T: ApproximateEquality {
+    lhs.0.isApproximatelyEqual(to: rhs.0, absoluteTolerance: absoluteTolerance)
+    && lhs.1.isApproximatelyEqual(to: rhs.1, absoluteTolerance: absoluteTolerance)
+    && lhs.2.isApproximatelyEqual(to: rhs.2, absoluteTolerance: absoluteTolerance)
+    && lhs.3.isApproximatelyEqual(to: rhs.3, absoluteTolerance: absoluteTolerance)
+}
