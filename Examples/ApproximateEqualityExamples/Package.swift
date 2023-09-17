@@ -18,5 +18,11 @@ let package = Package(
                 .product(name: "ApproximateEqualityMacros", package: "ApproximateEquality"),
             ]
         ),
+        .testTarget(name: "ApproximateEqualityTests",
+            dependencies: [
+                .product(name: "ApproximateEquality", package: "ApproximateEquality"),
+                .product(name: "ApproximateEqualityMacros", package: "ApproximateEquality"),
+            ]
+        ),
     ]
 )
