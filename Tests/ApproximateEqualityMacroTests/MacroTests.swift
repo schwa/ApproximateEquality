@@ -3,8 +3,8 @@ import SwiftSyntaxMacrosTestSupport
 import XCTest
 
 // Macro implementations build for the host, so the corresponding module is not available when cross-compiling. Cross-compiled tests may still make use of the macro itself in end-to-end tests.
-#if canImport(ApproximateEqualityMacros)
-import ApproximateEqualityMacros
+#if canImport(ApproximateEqualityMacroImplementation)
+import ApproximateEqualityMacroImplementation
 
 let testMacros: [String: Macro.Type] = [
     "DeriveApproximateEquality": DeriveApproximateEquality.self,
@@ -14,7 +14,7 @@ let testMacros: [String: Macro.Type] = [
 
 final class MyMacroTests: XCTestCase {
     func testApproximateEqualityMacros() throws {
-#if canImport(ApproximateEqualityMacros)
+#if canImport(ApproximateEqualityMacroImplementation)
         assertMacroExpansion(
             """
             @DeriveApproximateEquality
@@ -44,7 +44,7 @@ final class MyMacroTests: XCTestCase {
     }
 
     func testApproximateEqualityIgnoredMacros() throws {
-#if canImport(ApproximateEqualityMacros)
+#if canImport(ApproximateEqualityMacroImplementation)
         assertMacroExpansion(
             """
             @DeriveApproximateEquality
@@ -74,7 +74,7 @@ final class MyMacroTests: XCTestCase {
     }
 
     func testACL() throws {
-#if canImport(ApproximateEqualityMacros)
+#if canImport(ApproximateEqualityMacroImplementation)
         assertMacroExpansion(
             """
             @DeriveApproximateEquality

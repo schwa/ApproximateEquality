@@ -1,4 +1,5 @@
 import Foundation
+import ApproximateEquality
 
 /// Automatically add conformance to ``ApproximateEquality`` to a type and provide an implementation of ``isApproximatelyEqual``
 ///
@@ -12,7 +13,7 @@ import Foundation
 /// }
 /// ```
 @attached(extension, conformances: ApproximateEquality, names: named(isApproximatelyEqual(to:absoluteTolerance:)))
-public macro DeriveApproximateEquality() = #externalMacro(module: "ApproximateEqualityMacros", type: "DeriveApproximateEquality")
+public macro DeriveApproximateEquality() = #externalMacro(module: "ApproximateEqualityMacroImplementation", type: "DeriveApproximateEquality")
 
 /// Use on a property to opt out of ``DeriveApproximateEquality``. Use this for when you don't want a property to be considered for ``ApproximateEquality`` conformance.
 ///
@@ -26,4 +27,4 @@ public macro DeriveApproximateEquality() = #externalMacro(module: "ApproximateEq
 /// }
 /// ```
 @attached(peer)
-public macro ApproximateEqualityIgnored() = #externalMacro(module: "ApproximateEqualityMacros", type: "ApproximateEqualityIgnored")
+public macro ApproximateEqualityIgnored() = #externalMacro(module: "ApproximateEqualityMacroImplementation", type: "ApproximateEqualityIgnored")

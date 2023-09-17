@@ -1,4 +1,5 @@
 import ApproximateEquality
+import ApproximateEqualityMacros
 import CoreGraphics
 
 @DeriveApproximateEquality

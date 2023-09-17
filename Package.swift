@@ -12,24 +12,26 @@ let package = Package(
         .macCatalyst(.v13)
     ],
     products: [
-        .library(
-            name: "ApproximateEquality",
-            targets: ["ApproximateEquality"]),
+        .library(name: "ApproximateEquality", targets: ["ApproximateEquality"]),
+        .library(name: "ApproximateEqualityMacros", targets: ["ApproximateEqualityMacros"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-numerics", from: "1.0.0"),
-        .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0-swift-5.9-DEVELOPMENT-SNAPSHOT-2023-04-25-b"),
+        .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0"),
     ],
     targets: [
-        .target(
-            name: "ApproximateEquality",
+        .target(name: "ApproximateEquality",
             dependencies: [
-                "ApproximateEqualityMacros",
                 .product(name: "Numerics", package: "swift-numerics")
             ]
         ),
-        .macro(
-            name: "ApproximateEqualityMacros",
+        .target(name: "ApproximateEqualityMacros",
+            dependencies: [
+                "ApproximateEquality",
+                "ApproximateEqualityMacroImplementation"
+            ]
+        ),
+        .macro(name: "ApproximateEqualityMacroImplementation",
             dependencies: [
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
@@ -39,7 +41,7 @@ let package = Package(
             name: "ApproximateEqualityMacroTests",
             dependencies: [
                 "ApproximateEquality",
-                "ApproximateEqualityMacros",
+                "ApproximateEqualityMacroImplementation",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
             ]
         ),

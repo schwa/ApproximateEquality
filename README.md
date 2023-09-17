@@ -12,6 +12,7 @@ Annotate your types with ``DeriveApproximateEquality`` to automatically conform 
 
 ```swift
 import ApproximateEquality
+import ApproximateEqualityMacros
 import CoreGraphics
 
 @DeriveApproximateEquality
