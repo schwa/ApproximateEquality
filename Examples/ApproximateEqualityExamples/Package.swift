@@ -8,7 +8,8 @@ let package = Package(
         .macOS(.v10_15),
     ],
     dependencies: [
-        .package(path: "../..")
+        .package(path: "../.."),
+        .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0"),
     ],
     targets: [
         .executableTarget(
@@ -16,6 +17,15 @@ let package = Package(
             dependencies: [
                 .product(name: "ApproximateEquality", package: "ApproximateEquality"),
                 .product(name: "ApproximateEqualityMacros", package: "ApproximateEquality"),
+            ]
+        ),
+        .testTarget(name: "ApproximateEqualityTests",
+            dependencies: [
+                .product(name: "ApproximateEquality", package: "ApproximateEquality"),
+                .product(name: "ApproximateEqualityMacros", package: "ApproximateEquality"),
+                .product(name: "SwiftSyntax", package: "swift-syntax"),
+                .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+                .product(name: "SwiftCompilerPlugin", package: "swift-syntax")
             ]
         ),
     ]
