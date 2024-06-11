@@ -1,6 +1,5 @@
 import XCTest
 @testable import ApproximateEquality
-import Numerics
 
 extension Double {
     static let error = 0.00001

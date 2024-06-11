@@ -16,13 +16,12 @@ let package = Package(
         .library(name: "ApproximateEqualityMacros", targets: ["ApproximateEqualityMacros"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-numerics", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-syntax.git", from: "509.0.0"),
     ],
     targets: [
         .target(name: "ApproximateEquality",
             dependencies: [
-                .product(name: "Numerics", package: "swift-numerics")
+                "NumericsLite"
             ]
         ),
         .target(name: "ApproximateEqualityMacros",
@@ -50,8 +49,9 @@ let package = Package(
             name: "ApproximateEqualityTests",
             dependencies: [
                 "ApproximateEquality",
-                .product(name: "Numerics", package: "swift-numerics")
+                "NumericsLite",
             ]
         ),
+        .target(name: "NumericsLite"),
     ]
 )

@@ -1,5 +1,5 @@
 import CoreGraphics
-import Numerics
+import NumericsLite
 
 extension CGFloat: ApproximateEquality {
     @inlinable

@@ -1,4 +1,4 @@
-import Numerics
+import NumericsLite
 
 /// Types conforming to ``ApproximateEquality`` can be tested for approximate equality with ``isApproximatelyEqual(to:absoluteTolerance:)-6v7ke``
 public protocol ApproximateEquality {
@@ -6,12 +6,6 @@ public protocol ApproximateEquality {
 
     func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool
 }
-
-//extension ApproximateEquality where Self.Magnitude: FloatingPoint {
-//    public func isApproximatelyEqual(to other: Self, absoluteTolerance: Magnitude) -> Bool {
-//        return isApproximatelyEqual(to: other, absoluteTolerance: absoluteTolerance, relativeTolerance: Magnitude.zero)
-//    }
-//}
 
 extension Float: ApproximateEquality {
     @inlinable

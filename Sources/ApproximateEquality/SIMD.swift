@@ -1,5 +1,5 @@
+import NumericsLite
 import simd
-import Numerics
 
 extension SIMD2: ApproximateEquality where Scalar: BinaryFloatingPoint, Scalar: ApproximateEquality {
     @inlinable

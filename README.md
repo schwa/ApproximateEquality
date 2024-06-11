@@ -48,6 +48,12 @@ extension MyType: ApproximateEquality {
 
 Note that the property prefixed with ``@ApproximateEqualityIgnored`` is used in the implementation.
 
+## License
+
+MIT.
+
+Portions of thise code are from the Apple-Numerics (<https://github.com/apple/swift-numerics>) project and are licensed under the Apache License
+
 ## TODO
 
 - [ ]: Test against more complex types.
