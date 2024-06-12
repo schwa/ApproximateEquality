@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": ["swift"],
+      "name": "Debug ApproximateEqualityExamples",
+      "program": "${workspaceFolder:ApproximateEqualityExamples}/.build/debug/ApproximateEqualityExamples",
+      "args": [],
+      "cwd": "${workspaceFolder:ApproximateEqualityExamples}",
+      "preLaunchTask": "swift: Build Debug ApproximateEqualityExamples"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "sourceLanguages": ["swift"],
+      "name": "Release ApproximateEqualityExamples",
+      "program": "${workspaceFolder:ApproximateEqualityExamples}/.build/release/ApproximateEqualityExamples",
+      "args": [],
+      "cwd": "${workspaceFolder:ApproximateEqualityExamples}",
+      "preLaunchTask": "swift: Build Release ApproximateEqualityExamples"
+    }
+  ]
+}
