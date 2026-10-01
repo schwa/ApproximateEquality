@@ -33,6 +33,5 @@ extension CGRect: ApproximateEquality {
     @inlinable
     public func isApproximatelyEqual(to other: Self, absoluteTolerance: CGFloat.Magnitude) -> Bool {
         isTupleApproximatelyEqual((minX, minY, width, height), (other.minX, other.minY, other.width, other.height), absoluteTolerance: absoluteTolerance)
-
     }
 }

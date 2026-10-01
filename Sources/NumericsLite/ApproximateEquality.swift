@@ -256,7 +256,7 @@ extension AdditiveArithmetic {
     if self == other { return true }
     let delta = norm(self - other)
     let scale = max(norm(self), norm(other))
-    let bound = max(absoluteTolerance, scale*relativeTolerance)
+    let bound = max(absoluteTolerance, scale * relativeTolerance)
     return delta.isFinite && delta <= bound
   }
 }
